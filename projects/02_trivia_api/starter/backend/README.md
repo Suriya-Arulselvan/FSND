@@ -87,6 +87,133 @@ GET '/categories'
 '5' : "Entertainment",
 '6' : "Sports"}
 
+GET '/questions'
+- Fetches an paginated array of questions, total number of questions, and dictionary of categories with keys as category id and value as string of category.  Maximum number of questions displayed in a page is 10.
+- Request Argument: Page number
+- Returns: An object with the array of questions, dictionary of categories with keys as category id and value as string of the category.
+- Example output: 
+{
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "current_category": null,
+  "questions": [
+    {
+      "answer": "Apollo 13",
+      "category": 5,
+      "difficulty": 4,
+      "id": 2,
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    },
+    {
+      "answer": "Tom Cruise",
+      "category": 5,
+      "difficulty": 4,
+      "id": 4,
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    },
+  ],
+  "success": true,
+  "total_questions": 2
+}
+
+DELETE '/questions/<int:index>'
+- Deletes the question whose id is being passed as a the request parameter
+- Request parameter:  question id
+- Returns: id of the deleted question, last page number of the question list and response status
+- Example response: 
+{
+  "id": 14,
+  "lastPage": 3,
+  "success": true
+}
+
+POST '/questions'
+- Creates a new question with the given information
+- Request parameter: question, answer, difficulty, and category of the Question object to be created
+- Returns: id of question just created
+- Example response:
+{
+  "id": 48
+}
+
+
+POST '/questions/search'
+- Returns the list of questions that contain the search term passed as a request argument. The search is case insensitive.
+- Request parameter: searchTerm
+- Returns: response status, array of questions as search results, number of search results
+- Example response:
+{
+  "current_category": null,
+  "questions": [
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    }
+  ],
+  "success": true,
+  "total_questions": 1
+}
+
+
+GET '/categories/<int:index>/questions'
+- Returns the list of questions for the category id passed as argument
+- Request parameter: cateogry id
+- Returns: response status, array of questions, number of questiosn in the category, current category
+- Example response: 
+{
+  "current_category": {
+    "id": 3,
+    "type": "Geography"
+  },
+  "questions": [
+    {
+      "answer": "Lake Victoria",
+      "category": 3,
+      "difficulty": 2,
+      "id": 13,
+      "question": "What is the largest lake in Africa?"
+    },
+    {
+      "answer": "Agra",
+      "category": 3,
+      "difficulty": 2,
+      "id": 15,
+      "question": "The Taj Mahal is located in which Indian city?"
+    }
+  ],
+  "success": true,
+  "total_questions": 2
+}
+
+
+POST '/quizzes'
+- Return the next question to play the quiz based on category selected and previous questions already attempted
+- Request parameter: list of previous questions, and quiz category
+- Returns: response status, current question
+- Example response:
+{
+    "success": true,
+    "question": {
+      "answer": "Agra",
+      "category": 3,
+      "difficulty": 2,
+      "id": 15,
+      "question": "The Taj Mahal is located in which Indian city?"
+    }
+}
+
+
+
+
 ```
 
 
